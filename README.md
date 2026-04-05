@@ -131,8 +131,9 @@ The same RSF file. The same engine. A completely different world.
 
 ## Specification
 
-→ [RSF v1.0 Specification](spec/rsf-v1.md)  
-→ [JSON Schema](schema/rsf.schema.json)  
+→ [RSF v2.0 Specification](spec/rsf-v2.md) ← start here
+→ [RSF v1.0 Specification](spec/rsf-v1.md)
+→ [JSON Schema](schema/rsf.schema.json)
 → [Examples](examples/)
 
 ---
