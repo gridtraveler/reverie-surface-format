@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://reverie.studio/rsf/schema/v1.0/rsf.schema.json",
+  "title": "RSF — Reverie Surface Format v1.0",
+  "description": "An open standard for describing any real-world display surface.",
+  "type": "object",
+  "required": ["rsf_version", "surface_id", "display_name", "category", "geometry"],
+  "additionalProperties": true,
+
+  "properties": {
+
+    "rsf_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "RSF specification version."
+    },
+
+    "surface_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$",
+      "description": "Unique machine-readable identifier. Lowercase and underscores only. Never changes."
+    },
+
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable surface name shown in operator UI."
+    },
+
+    "category": {
+      "type": "string",
+      "enum": ["primary", "deck", "overhead", "remote", "reference", "specials", "custom"],
+      "description": "The role of the surface in the installation."
+    },
+
+    "geometry": {
+      "type": "object",
+      "required": ["width_px", "height_px"],
+      "properties": {
+        "width_px": { "type": "integer", "minimum": 1 },
+        "height_px": { "type": "integer", "minimum": 1 },
+        "width_m": { "type": "number", "minimum": 0 },
+        "height_m": { "type": "number", "minimum": 0 },
+        "shape": {
+          "type": "string",
+          "enum": ["flat", "curved", "cylindrical", "spherical", "irregular"],
+          "default": "flat"
+        },
+        "orientation": {
+          "type": "string",
+          "enum": ["landscape", "portrait", "square"]
+        },
+        "aspect_ratio": { "type": "string" },
+        "curve_radius_m": { "type": ["number", "null"] },
+        "mesh_ref": { "type": ["string", "null"] }
+      }
+    },
+
+    "position": {
+      "type": "object",
+      "properties": {
+        "x_m": { "type": "number" },
+        "y_m": { "type": "number" },
+        "z_m": { "type": "number" },
+        "rotation_x_deg": { "type": "number" },
+        "rotation_y_deg": { "type": "number" },
+        "rotation_z_deg": { "type": "number" },
+        "anchor": {
+          "type": "string",
+          "enum": ["center", "bottom_left", "top_left", "bottom_right", "top_right"]
+        }
+      }
+    },
+
+    "hardware": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "led_wall", "lcd_panel", "projection_flat", "projection_curved",
+            "projection_dome", "ar_headset", "holographic", "architectural",
+            "medical_display", "vehicle_display", "custom"
+          ]
+        },
+        "manufacturer": { "type": "string" },
+        "model": { "type": "string" },
+        "pixel_pitch_mm": { "type": "number", "minimum": 0 },
+        "brightness_nits": { "type": "number", "minimum": 0 },
+        "refresh_rate_hz": { "type": "number", "minimum": 0 },
+        "hdr": { "type": "boolean" },
+        "color_volume": { "type": "string" },
+        "input_signal": { "type": "string" },
+        "processing_unit": { "type": "string" }
+      }
+    },
+
+    "content": {
+      "type": "object",
+      "properties": {
+        "accepts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["video", "image", "ndi", "sdi", "generative", "data_viz", "web", "passthrough"]
+          }
+        },
+        "default_fit": {
+          "type": "string",
+          "enum": ["fill", "fit", "stretch", "tile", "center"],
+          "default": "fill"
+        },
+        "color_space": { "type": "string" },
+        "missing_behavior": {
+          "type": "string",
+          "enum": ["black", "hold", "warn", "block"],
+          "default": "black"
+        },
+        "max_fps": { "type": "number" },
+        "preferred_codec": { "type": "string" },
+        "audio_passthrough": { "type": "boolean" }
+      }
+    },
+
+    "states": {
+      "type": "object",
+      "properties": {
+        "default_state": { "type": "string" },
+        "visible_in_ui_default": { "type": "boolean" },
+        "enabled_by_default": { "type": "boolean" },
+        "allow_live_override": { "type": "boolean" },
+        "blackout_participates": { "type": "boolean" },
+        "save_with_show": { "type": "boolean" }
+      }
+    },
+
+    "vocabulary": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "string",
+          "enum": [
+            "live_events", "virtual_production", "surgical_theater",
+            "architecture", "emergency_response", "space_operations", "custom"
+          ]
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "custom_fields": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+
+    "meta": {
+      "type": "object",
+      "properties": {
+        "created": { "type": "string", "format": "date-time" },
+        "modified": { "type": "string", "format": "date-time" },
+        "author": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  },
+
+  "patternProperties": {
+    "^x_": {
+      "description": "Extension fields. Prefixed with x_. Preserved by parsers, ignored by validators."
+    }
+  }
+}
