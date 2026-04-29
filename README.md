@@ -143,6 +143,7 @@ The same RSF file. The same engine. A completely different world.
 | Tool | Status | Link |
 |---|---|---|
 | **Reverie** (Unreal Engine 5) | ✅ Reference implementation | [reverie.studio](https://reverie.studio) |
+| **RuntimeAssetBridge (proposal)** | 🧪 Runtime glTF plugin blueprint | [docs/unreal-runtime-gltf-plugin.md](docs/unreal-runtime-gltf-plugin.md) |
 | Your tool here | — | Open a PR |
 
 RSF is designed to be implemented by anyone. If you build an RSF reader or writer, open a PR to add it here.
