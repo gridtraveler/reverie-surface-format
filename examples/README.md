@@ -178,3 +178,9 @@ Free for any use, commercial or otherwise, forever.
 
 *Published by [Reverie](https://reverie.studio) · Built with Unreal Engine 5*  
 *The physical world deserves an operating system.*
+
+---
+
+## Visual Experiment
+
+- `sacred-geometry-evolver.html` — full-screen abstract animation with sacred geometry motifs, translucent morphing lines, attractor-driven particle motion, and a timed optical illusion pulse every 15 seconds.
